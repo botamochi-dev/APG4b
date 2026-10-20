@@ -173,16 +173,14 @@ def fetch_problem(task_id: str):
     req = urllib.request.Request(CONTEST_URL + task_id, headers={"User-Agent": "apg4b-helper"})
     with urllib.request.urlopen(req, timeout=10) as res:
         page = res.read().decode("utf-8")
-    # 解答例より前だけを見る（解答例のコードをひな形にしないため）
+    # 入出力例だけを取得する。ページ内のコードは完成した解答の可能性がある。
     problem = page.split("<h3>解答例", 1)[0]
 
     def samples(kind):
         found = re.findall(rf"<h3>{kind}\s*(\d+)</h3>\s*<pre>(.*?)</pre>", problem, re.S)
         return {n: html.unescape(body).replace("\r\n", "\n") for n, body in found}
 
-    starter = re.search(r'<pre class="prettyprint linenums source-code">(.*?)</pre>', problem, re.S)
-    starter_code = html.unescape(starter.group(1)).replace("\r\n", "\n") if starter else None
-    return samples("入力例"), samples("出力例"), starter_code
+    return samples("入力例"), samples("出力例")
 
 
 def new(name: str):
@@ -196,17 +194,17 @@ def new(name: str):
     print(color(f"EX{num}（{chapter}）: {url}", CYAN))
 
     try:
-        inputs, outputs, starter = fetch_problem(task_id)
+        inputs, outputs = fetch_problem(task_id)
     except Exception as e:
         print(color(f"問題ページを取得できませんでした（{e}）。ひな形だけ作ります。", YELLOW))
-        inputs, outputs, starter = {}, {}, None
+        inputs, outputs = {}, {}
 
     src.parent.mkdir(parents=True, exist_ok=True)
     if src.exists():
         print(f"{src.relative_to(ROOT)} はすでにあるので上書きしません")
     else:
-        src.write_text(starter or TEMPLATE, encoding="utf-8", newline="\n")
-        print(f"作成: {src.relative_to(ROOT)}" + ("（問題文のプログラムをひな形にしました）" if starter else ""))
+        src.write_text(TEMPLATE, encoding="utf-8", newline="\n")
+        print(f"作成: {src.relative_to(ROOT)}（空のひな形）")
 
     if inputs:
         tdir = tests_dir(src)
