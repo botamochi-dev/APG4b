@@ -1,3 +1,7 @@
 # ビルドで作られるファイル
 *.exe
 output/
+
+# Python のキャッシュ
+__pycache__/
+*.py[cod]
