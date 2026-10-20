@@ -1,18 +1,19 @@
 {
+    // F5 で開いている .cpp をデバッグ実行（ブレークポイントで止めて変数を見られます）
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "g++.exe - アクティブ ファイルのビルドとデバッグ",
+            "name": "開いているファイルをデバッグ",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
+            "program": "${fileDirname}/output/${fileBasenameNoExtension}.exe",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
-            "miDebuggerPath": "C:\\Program Files (x86)\\mingw64\\bin\\gdb.exe",
+            "miDebuggerPath": "C:/Program Files (x86)/mingw64/bin/gdb.exe",
             "setupCommands": [
                 {
                     "description": "gdb の再フォーマットを有効にする",
@@ -20,7 +21,7 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "C/C++: g++ build active file"
+            "preLaunchTask": "ビルド"
         }
     ]
 }

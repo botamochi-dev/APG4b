@@ -1,29 +1,60 @@
-﻿{
+{
+    // Ctrl+Shift+B で「実行・テスト」が動きます。
+    // 他のタスクは Ctrl+Shift+P →「タスクの実行」から選べます。
     "version": "2.0.0",
     "tasks": [
         {
-            "type": "cppbuild",
-            "label": "C/C++: g++ build active file",
-            "command": "C:\\Program Files (x86)\\mingw64\\bin\\g++.exe",
-            "args": [
-                "-fdiagnostics-color=always",
-                "-g",
-                "${file}",
-                "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe",
-                "-I${workspaceFolder}/include"
-            ],
-            "options": {
-                "cwd": "${fileDirname}"
-            },
-            "problemMatcher": [
-                "$gcc"
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "detail": "MinGW g++ compiler"
+            "label": "実行・テスト",
+            "detail": "入出力例があれば答え合わせ、なければ普通に実行",
+            "type": "process",
+            "command": "python",
+            "args": ["${workspaceFolder}/tools/apg4b.py", "auto", "${file}"],
+            "group": { "kind": "build", "isDefault": true },
+            "presentation": { "focus": true, "clear": true },
+            "problemMatcher": { "base": "$gcc", "fileLocation": "absolute" }
+        },
+        {
+            "label": "実行",
+            "detail": "ビルドして実行（入力はキーボードから）",
+            "type": "process",
+            "command": "python",
+            "args": ["${workspaceFolder}/tools/apg4b.py", "run", "${file}"],
+            "presentation": { "focus": true, "clear": true },
+            "problemMatcher": { "base": "$gcc", "fileLocation": "absolute" }
+        },
+        {
+            "label": "テスト",
+            "detail": "入出力例で答え合わせ",
+            "type": "process",
+            "command": "python",
+            "args": ["${workspaceFolder}/tools/apg4b.py", "test", "${file}"],
+            "group": { "kind": "test", "isDefault": true },
+            "presentation": { "clear": true },
+            "problemMatcher": { "base": "$gcc", "fileLocation": "absolute" }
+        },
+        {
+            "label": "ビルド",
+            "detail": "コンパイルだけ（デバッグ前に使われます）",
+            "type": "process",
+            "command": "python",
+            "args": ["${workspaceFolder}/tools/apg4b.py", "build", "${file}"],
+            "presentation": { "reveal": "silent", "clear": true },
+            "problemMatcher": { "base": "$gcc", "fileLocation": "absolute" }
+        },
+        {
+            "label": "問題を準備",
+            "detail": "EX番号を入力すると、ひな形と入出力例を用意します",
+            "type": "process",
+            "command": "python",
+            "args": ["${workspaceFolder}/tools/apg4b.py", "new", "${input:exName}"],
+            "problemMatcher": []
+        }
+    ],
+    "inputs": [
+        {
+            "id": "exName",
+            "type": "promptString",
+            "description": "EX番号（例: EX4）"
         }
     ]
 }

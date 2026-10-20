@@ -1,0 +1,17 @@
+{
+  "tab_size": 4,
+  "format_on_save": "off",
+  "ensure_final_newline_on_save": true,
+  "file_scan_exclusions": [
+    "**/.git",
+    "**/.svn",
+    "**/.hg",
+    "**/.jj",
+    "**/CVS",
+    "**/.DS_Store",
+    "**/Thumbs.db",
+    "**/.classpath",
+    "**/.settings",
+    "**/output"
+  ]
+}

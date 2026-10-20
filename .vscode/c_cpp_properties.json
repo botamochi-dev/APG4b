@@ -3,17 +3,15 @@
         {
             "name": "Win32",
             "includePath": [
-                "${workspaceFolder}/**",
                 "${workspaceFolder}/include"
             ],
             "defines": [
-                "_DEBUG",
-                "UNICODE",
-                "_UNICODE"
+                "_GLIBCXX_DEBUG"
             ],
-            "compilerPath": "C:\\Program Files (x86)\\mingw64\\bin\\g++.exe",
+            "compilerPath": "C:/Program Files (x86)/mingw64/bin/g++.exe",
+            "compilerArgs": ["-std=gnu++23"],
             "cStandard": "c17",
-            "cppStandard": "c++17",
+            "cppStandard": "gnu++23",
             "intelliSenseMode": "windows-gcc-x64"
         }
     ],

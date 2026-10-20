@@ -1,0 +1,49 @@
+// Zed のタスク。Alt+Shift+T（task: spawn）で一覧から選び、
+// Alt+T（task: rerun）で前回のタスクをもう一度実行できます。
+[
+  {
+    "label": "実行・テスト",
+    "command": "python",
+    "args": ["tools/apg4b.py", "auto", "$ZED_FILE"],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
+  },
+  {
+    "label": "実行（キーボードから入力）",
+    "command": "python",
+    "args": ["tools/apg4b.py", "run", "$ZED_FILE"],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
+  },
+  {
+    "label": "テスト（入出力例で答え合わせ）",
+    "command": "python",
+    "args": ["tools/apg4b.py", "test", "$ZED_FILE"],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
+  },
+  {
+    "label": "ビルド",
+    "command": "python",
+    "args": ["tools/apg4b.py", "build", "$ZED_FILE"],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
+  },
+  {
+    "label": "問題を準備",
+    "command": "python",
+    "args": ["tools/apg4b.py", "new"],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
+  }
+]

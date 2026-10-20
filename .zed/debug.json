@@ -1,0 +1,16 @@
+// Zed のデバッグ設定。F4（debugger: start）→「開いているファイルをデバッグ」。
+// 行番号の左をクリックしてブレークポイントを置くと、そこで止まって変数を見られます。
+[
+  {
+    "label": "開いているファイルをデバッグ",
+    "adapter": "GDB",
+    "request": "launch",
+    "build": {
+      "command": "python",
+      "args": ["tools/apg4b.py", "build", "$ZED_FILE"],
+      "cwd": "$ZED_WORKTREE_ROOT"
+    },
+    "program": "$ZED_DIRNAME/output/$ZED_STEM.exe",
+    "cwd": "$ZED_DIRNAME"
+  }
+]
